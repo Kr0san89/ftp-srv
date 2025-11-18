@@ -105,7 +105,7 @@ describe('Integration', function () {
       else fs.unlinkSync(item);
     });
 
-    fs.rmdirSync(dir, { recursive: true });
+    fs.rmSync(dir, { recursive: true });
   }
 
   function runFileSystemTests(name) {
@@ -336,7 +336,7 @@ describe('Integration', function () {
     it('MKD témp', (done) => {
       const path = `${clientDirectory}/${name}/témp`;
       if (fs.existsSync(path)) {
-        fs.rmdirSync(path);
+        fs.rmSync(path);
       }
       client.mkdir('témp', (err) => {
         expect(err).to.not.exist;
@@ -348,14 +348,14 @@ describe('Integration', function () {
     it('MKD témp multiple levels deep', (done) => {
       const path = `${clientDirectory}/${name}/témp`;
       if (fs.existsSync(path)) {
-        fs.rmdirSync(path, {recursive: true});
+        fs.rmSync(path, {recursive: true});
       }
 
       client.mkdir('témp/first/second', (err) => {
         expect(err).to.not.exist;
         expect(fs.existsSync(path)).to.equal(true);
 
-        fs.rmdirSync(path, {recursive: true});
+        fs.rmSync(path, {recursive: true});
         done();
       });
     });
